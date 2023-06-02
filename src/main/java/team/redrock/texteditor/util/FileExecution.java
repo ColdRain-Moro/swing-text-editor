@@ -1,39 +1,78 @@
 package team.redrock.texteditor.util;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 /**
  * Created by rain on 2023/5/30
  **/
 public enum FileExecution {
-    C(FileExecution::executeC);
-    private FileExecutionHandler handler;
+    C(name -> name.endsWith(".c"),FileExecution::executeC),
+    JAVA(name -> name.endsWith(".java"), FileExecution::executeJava),
+    JS(name -> name.endsWith(".js"), FileExecution::executeJs),
+    PY(name -> name.endsWith(".py"), FileExecution::executePython),
+    GO(name -> name.endsWith(".go"), FileExecution::executeGo);
+    private final Handler handler;
+    private final Judge judge;
 
-    FileExecution(FileExecutionHandler handler) {
+    FileExecution(Judge judge, Handler handler) {
         this.handler = handler;
+        this.judge = judge;
     }
 
-    private static final Executor executor = Executors.newSingleThreadExecutor();
+    public interface Judge {
+        boolean pass(String fileName);
+    }
 
-    private static void executeC(File file, FileExecutionFinishHandler callback) {
-        executor.execute(() -> {
-            try {
-                StringBuilder info = new StringBuilder();
-                String error = "";
-                Process exec = Runtime.getRuntime().exec(new String[]{"gcc", "-o", file.getAbsolutePath() + ".out", file.getAbsolutePath()});
-                exec.waitFor();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(exec.getInputStream()))) {
-                    info.append(reader.readLine());
-                    info.append("\n");
-                }
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    public interface Handler {
+        void handle(File file, ProcessCallback callback);
+    }
+
+    private static void executeC(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback,
+                    new String[] { "gcc", "-o", file.getAbsolutePath() + ".out", file.getAbsolutePath() },
+                    new String[] { file.getAbsolutePath() + ".out" }
+            );
         });
+    }
+
+    private static void executeJava(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback,
+                    new String[] { "javac", file.getAbsolutePath() },
+                    new String[] { "java", file.getName().split("\\.java")[0] }
+            );
+        });
+    }
+
+    private static void executeJs(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback, new String[] { "node", file.getAbsolutePath() });
+        });
+    }
+
+    private static void executePython(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback, new String[] { "python3", file.getAbsolutePath() });
+        });
+    }
+
+    private static void executeGo(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback, new String[]{ "go", "run", "." });
+        });
+    }
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public Judge getJudge() {
+        return judge;
     }
 }

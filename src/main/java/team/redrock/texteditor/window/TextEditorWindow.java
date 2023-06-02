@@ -3,11 +3,17 @@ package team.redrock.texteditor.window;
 import com.formdev.flatlaf.fonts.jetbrains_mono.FlatJetBrainsMonoFont;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import team.redrock.texteditor.Main;
+import team.redrock.texteditor.transform.TextTransformer;
+import team.redrock.texteditor.util.FileExecution;
+import team.redrock.texteditor.util.FileTreeAdapter;
 import team.redrock.texteditor.util.FileType;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.StyleContext;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.io.File;
@@ -24,6 +30,7 @@ import java.util.Map;
 public class TextEditorWindow extends JFrame {
 
     private final RSyntaxTextArea textArea;
+    private final JTree fileTree;
     private final JFileChooser fileChooser = new JFileChooser();
     private File openingFile;
 
@@ -31,14 +38,29 @@ public class TextEditorWindow extends JFrame {
         setTitle("TextEditor");
         setSize(800, 600);
         // close 就直接退出
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.textArea = new RSyntaxTextArea();
         textArea.setLineWrap(true);
         textArea.setMargin(new Insets(5, 10, 5, 10));
 //        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_C);
         textArea.setHighlightCurrentLine(false);
+
+        fileTree = new JTree(new DefaultMutableTreeNode("nothing"));
+        fileTree.setShowsRootHandles(true);
+
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        renderer.setClosedIcon(Main.CLOSED_ICON);
+        renderer.setOpenIcon(Main.OPEN_ICON);
+        renderer.setLeafIcon(Main.LEAF_ICON);
+        fileTree.setCellRenderer(renderer);
+
+        FileTreeAdapter.setupListener(fileTree, file -> {
+            if (!file.isDirectory()) setOpeningFile(file);
+        });
+        JScrollPane fileTreeScrollPane = new JScrollPane(fileTree);
+        fileTreeScrollPane.setPreferredSize(new Dimension(150, 1));
+        fileTreeScrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         // 设置字体 支持中文
         final Font f = StyleContext.getDefaultStyleContext().getFont(FlatJetBrainsMonoFont.FAMILY, Font.PLAIN, 13);
@@ -51,7 +73,10 @@ public class TextEditorWindow extends JFrame {
 
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
         scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, fileTreeScrollPane, scrollPane);
+
+        getContentPane().add(splitPane, BorderLayout.CENTER);
 
         // menu
         JMenuBar menuBar = new JMenuBar();
@@ -64,9 +89,11 @@ public class TextEditorWindow extends JFrame {
         openItem.addActionListener(e -> load());
         saveItem.addActionListener(e -> save());
         closeItem.addActionListener(e -> System.exit(0));
+        runItem.addActionListener(e -> run());
 
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(runItem);
         fileMenu.addSeparator();
         fileMenu.add(closeItem);
 
@@ -105,15 +132,41 @@ public class TextEditorWindow extends JFrame {
         }
     }
 
+    void run() {
+        if (openingFile == null) return;
+        FileExecution execution = Arrays.stream(FileExecution.values())
+                .filter(it -> it.getJudge().pass(openingFile.getName()))
+                .findFirst()
+                .orElse(null);
+        if (execution == null) {
+            JOptionPane.showMessageDialog(this, "该文件不是 TextEditor 支持运行的文件类型", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        TerminalWindow terminalWindow = new TerminalWindow();
+        terminalWindow.setVisible(true);
+        execution.getHandler().handle(openingFile, c -> {
+            terminalWindow.getTextArea().setText(
+                    terminalWindow.getTextArea().getText() + c
+            );
+        });
+    }
+
     private void setOpeningFile(File file) {
         this.openingFile = file;
         setTitle("TextEditor - " + file.getName());
-        try (FileReader reader = new FileReader(openingFile)) {
-            textArea.read(reader, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error opening file", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+
+        // 设置文件浏览器路径为当前路径
+        FileTreeAdapter adapter = new FileTreeAdapter(file.getParentFile());
+        adapter.apply(fileTree);
+
+        // transformer 如果有 transformer 就只读
+        TextTransformer transformer = TextTransformer.transformers
+                .stream()
+                .filter(it -> it.shouldTransform(file))
+                .findFirst()
+                .orElse(null);
+        textArea.setEditable(transformer == null);
+
         // 设置高亮
         String name = file.getName();
         String[] split = name.split("\\.");
@@ -124,6 +177,19 @@ public class TextEditorWindow extends JFrame {
                 .map(FileType::getHighlight)
                 .orElse(null);
         textArea.setSyntaxEditingStyle(style);
+
+        if (transformer != null) {
+            FileType type = transformer.transform(file, textArea::setText);
+            textArea.setSyntaxEditingStyle(type == null ? null : type.getHighlight());
+            return;
+        }
+
+        try (FileReader reader = new FileReader(openingFile)) {
+            textArea.read(reader, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error opening file", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }

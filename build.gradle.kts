@@ -18,9 +18,16 @@ application {
 dependencies {
     implementation("com.formdev:flatlaf-fonts-jetbrains-mono:2.242")
     implementation("com.formdev:flatlaf:3.1.1")
+    implementation("org.apache.tika:tika-core:2.7.0")
     implementation("com.fifesoft:rsyntaxtextarea:3.3.3")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
 }
 
 tasks.test {
