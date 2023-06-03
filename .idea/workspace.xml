@@ -5,24 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af2218c0-14ec-4192-8028-d31d11ed528f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/transform/BinaryFileTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/transform/JavaClassTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/transform/TextTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileTreeAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/IOTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/ProcessCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/ProcessUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TerminalWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/controller/TextEditorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/model/TextEditorModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileExecution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileExecution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileExecutionFinishHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileExecutionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/widget/TerminalScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TextEditorWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TextEditorWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TerminalWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/view/TerminalWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TextEditorWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/view/TextEditorWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,25 +47,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="JTreeExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.redrock.texteditor.JTreeExample" />
@@ -132,11 +120,11 @@
       </method>
     </configuration>
     <configuration name="TextEditorWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.redrock.texteditor.window.TextEditorWindow" />
+      <option name="MAIN_CLASS_NAME" value="team.redrock.texteditor.view.TextEditorWindow" />
       <module name="TextEditor.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="team.redrock.texteditor.window.*" />
+          <option name="PATTERN" value="team.redrock.texteditor.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -167,7 +155,12 @@
       <workItem from="1685594913243" duration="16344000" />
       <workItem from="1685681315916" duration="191000" />
       <workItem from="1685681512392" duration="673000" />
-      <workItem from="1685687083648" duration="10099000" />
+      <workItem from="1685687083648" duration="10859000" />
+      <workItem from="1685705639555" duration="444000" />
+      <workItem from="1685715924498" duration="1079000" />
+      <workItem from="1685717012725" duration="850000" />
+      <workItem from="1685725130706" duration="74000" />
+      <workItem from="1685762476534" duration="4070000" />
     </task>
     <servers />
   </component>

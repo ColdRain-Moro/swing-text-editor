@@ -1,11 +1,10 @@
 package team.redrock.texteditor;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.jetbrains_mono.FlatJetBrainsMonoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import team.redrock.texteditor.transform.TextTransformer;
-import team.redrock.texteditor.window.TextEditorWindow;
+import team.redrock.texteditor.mvc.view.TextEditorWindow;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
