@@ -10,7 +10,10 @@ public enum FileExecution {
     JAVA(name -> name.endsWith(".java"), FileExecution::executeJava),
     JS(name -> name.endsWith(".js"), FileExecution::executeJs),
     PY(name -> name.endsWith(".py"), FileExecution::executePython),
-    GO(name -> name.endsWith(".go"), FileExecution::executeGo);
+    GO(name -> name.endsWith(".go"), FileExecution::executeGo),
+    KOTLIN(name -> name.endsWith(".kt"), FileExecution::executeKotlin),
+    RUST(name -> name.endsWith(".rs"), FileExecution::executeRust);
+
     private final Handler handler;
     private final Judge judge;
 
@@ -65,6 +68,26 @@ public enum FileExecution {
         IOTask.runTask(() -> {
             File pwd = file.getParentFile();
             ProcessUtils.executeCmds(pwd, callback, new String[]{ "go", "run", "." });
+        });
+    }
+
+    private static void executeKotlin(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback,
+                    new String[] { "kotlinc", file.getAbsolutePath() },
+                    new String[] { "java", file.getName().split("\\.kt")[0] + "Kt" }
+            );
+        });
+    }
+
+    private static void executeRust(File file, ProcessCallback callback) {
+        IOTask.runTask(() -> {
+            File pwd = file.getParentFile();
+            ProcessUtils.executeCmds(pwd, callback,
+                    new String[] { "rustc", "-o", file.getAbsolutePath() + ".out", file.getAbsolutePath() },
+                    new String[] { file.getAbsolutePath() + ".out" }
+            );
         });
     }
 

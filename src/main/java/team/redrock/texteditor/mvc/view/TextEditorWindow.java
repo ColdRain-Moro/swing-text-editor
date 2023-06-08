@@ -6,7 +6,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import team.redrock.texteditor.Main;
 import team.redrock.texteditor.mvc.controller.TextEditorController;
 import team.redrock.texteditor.mvc.model.TextEditorModel;
-import team.redrock.texteditor.util.FileTreeAdapter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

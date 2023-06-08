@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af2218c0-14ec-4192-8028-d31d11ed528f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/controller/TextEditorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/model/TextEditorModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ProcessTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TerminalWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/view/TerminalWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/window/TextEditorWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/view/TextEditorWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/controller/TextEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/controller/TextEditorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/view/TextEditorWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/mvc/view/TextEditorWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileExecution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileExecution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +20,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TextEditor" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -54,15 +70,16 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/rain/Rain/project/java/TextEditor&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -109,6 +126,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.redrock.texteditor.Main" />
       <module name="TextEditor.main" />
+      <option name="PROGRAM_PARAMETERS" value=" editor.sh" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="team.redrock.texteditor.*" />
@@ -119,26 +137,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TextEditorWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.redrock.texteditor.view.TextEditorWindow" />
-      <module name="TextEditor.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.redrock.texteditor.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="ProcessTest.testProcessRun" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ProcessTest.testProcessRun&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ProcessTest.testProcessRun" />
         <item itemvalue="Application.JTreeExample" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.LineNumberedTextArea" />
         <item itemvalue="Application.LineNumberedScrollPane" />
-        <item itemvalue="Application.TextEditorWindow" />
       </list>
     </recent_temporary>
   </component>
@@ -160,12 +189,34 @@
       <workItem from="1685715924498" duration="1079000" />
       <workItem from="1685717012725" duration="850000" />
       <workItem from="1685725130706" duration="74000" />
-      <workItem from="1685762476534" duration="4070000" />
+      <workItem from="1685762476534" duration="4385000" />
+      <workItem from="1685886764200" duration="786000" />
+      <workItem from="1685935948284" duration="4166000" />
+      <workItem from="1685945224312" duration="55000" />
+      <workItem from="1686024781467" duration="1387000" />
+      <workItem from="1686044460740" duration="1369000" />
+      <workItem from="1686204061272" duration="2101000" />
+      <workItem from="1686206226371" duration="3649000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/team/redrock/texteditor/util/FileNode.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -35,11 +35,11 @@ public class TextEditorController {
     }
 
     public void setOpeningFile(File file) {
-        this.openingFile = file;
+        this.openingFile = file.getAbsoluteFile();
         window.setTitle("TextEditor - " + file.getName());
 
         // 设置文件浏览器路径为当前路径
-        FileTreeAdapter adapter = new FileTreeAdapter(file.getParentFile());
+        FileTreeAdapter adapter = new FileTreeAdapter(openingFile.getParentFile());
         adapter.apply(window.getFileTree());
 
         // transformer 如果有 transformer 就只读
